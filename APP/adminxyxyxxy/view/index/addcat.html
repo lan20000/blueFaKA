@@ -1,0 +1,38 @@
+{extend name="index" /}
+{block name="title"}
+添加分类
+{/block}
+{block name="body"}
+<form class="layui-form" action="/adminxyxyxxy/index/addcat" style="margin-top:20px" method="post">
+        <div class="layui-form-item">
+          <label class="layui-form-label">分类名</label>
+          <div class="layui-input-block">
+            <input type="text" name="name" placeholder="请输入分类名" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">分类简称</label>
+          <div class="layui-input-block">
+            <input type="text" name="abridge" placeholder="字母或者数字(不建议用汉字)" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-form-item">
+                <label class="layui-form-label">分类图片</label>
+                <div class="layui-input-block">
+                  <input type="text" name="image" placeholder="请输入带http://的图片链接" class="layui-input">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                  <label class="layui-form-label">分类排序</label>
+                  <div class="layui-input-block">
+                    <input type="number" name="sort" placeholder="数字越小越靠前" class="layui-input">
+                  </div>
+                </div>
+              <div class="layui-form-item">
+                    <div class="layui-input-block">
+                      <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                    </div>
+                  </div>
+        </form>
+
+{/block}

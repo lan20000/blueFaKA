@@ -1,0 +1,199 @@
+{extend name="base" /} {block name="title"} {$goodinfo.name} {/block} {block name="content"}
+<div class="gonggao">
+	{$siteinfo.goodgg}
+</div>
+<script>
+	$(function() {
+		if($("#kucun").val() == 0  and  {$goodinfo.id}>0) {
+			$("#paysubmit").attr("class", 'layui-btn layui-btn-big layui-btn-disabled');
+			$("#paysubmit").attr("disabled", true);
+			$("#paysubmit").html("库存不足");
+		}
+	});
+</script>
+<div class="good-trade">
+	<form action="/index/index/pay" class="layui-form layui-form-pane" method="post" onsubmit="return checkform()" style="padding:10px">
+		<fieldset class="layui-elem-field">
+			<legend>商品信息</legend>
+			<div class="layui-row">
+				<div class="layui-col-xs12 layui-col-md4">
+					<div class="layui-field-box">
+						<p><img src="{$goodinfo.images}" alt="" height="300px" width="100%"></p>
+						{if condition="!$isdaili"}
+						<fieldset class="layui-elem-field">
+								<legend>开通会员 - 享受尊享优惠价格</legend>
+								<div class="layui-field-box">
+									会员尊享价格：<span class="trade-price">¥{$goodinfo.dailiprice}</span>
+								</div>
+						</fieldset>
+						{/if}
+					</div>
+				</div>
+				<div class="layui-col-xs12 layui-col-md8">
+					<div class="layui-field-box">
+						<input type="hidden" value="{$goodinfo.id}" name="goodid">
+						<p><span class="trade-goodname">{$goodinfo.name}</span></p>
+						<hr>
+						{if condition="$isdaili"}
+						<p class="trade-goodinfo">
+								<span style="color:#6c6c6c">会员价格：</span>
+								<span class="trade-price">¥{$goodinfo.dailiprice}</span>
+								<span style="float:right;">
+																	<span style="color: #6C6C6C;">累积销量：</span>
+								<span style="color:#6c6c6c;font-size:18px;">{$goodinfo.sales}</span>
+								</span>
+						</p>
+						<div class="layui-form-item">							
+								<label class="layui-form-label">支付密码</label>
+								<div class="layui-input-inline">
+									<input type="text" name="psw" id="psw" lay-verify="required" placeholder="请输入支付密码" autocomplete="off" class="layui-input">
+								</div>
+						</div> 
+						{else /}
+						<p class="trade-goodinfo">
+							<span style="color:#6c6c6c">普通价格：</span>
+							<span class="trade-price">¥{$goodinfo.price}</span>
+							<span style="float:right;">
+                                                                <span style="color: #6C6C6C;">累积销量：</span>
+							<span style="color:#6c6c6c;font-size:18px;">{$goodinfo.sales}</span>
+							</span>
+						</p>
+						{/if}
+						<script>
+							function checkform() { 
+								var kucun = $("#kucun").val();
+								if({$isdaili}){
+									var psw=$("#psw").val()
+								if(psw < 6) {
+									layer.alert('请输入支付密码', {
+										icon: 2
+									});
+									return false;
+								} 	
+								}
+							if({$goodinfo.id}==0){
+								kucun=1;
+								qq=$("#qq").val() ;
+								psw=$("#psw").val()
+								if(qq< 5) {
+									layer.alert('请输入QQ号', {
+										icon: 2
+									});
+									return false;
+								} 
+															
+							}else{
+								
+								var email = $("#email").val();
+								if(email.length < 11) {
+									layer.alert('请输入联系手机号', {
+										icon: 2
+									});
+									return false;
+								}								
+							}
+								var count = $("#count").val();
+								count = parseInt(count);
+								kucun = parseInt(kucun);
+								if(count > kucun) {
+									layer.alert('购买数量大于库存量', {
+										icon: 2
+									});
+									return false;
+								}
+
+							}
+
+							//示范一个公告层
+						</script>
+						{if condition="$goodinfo.id >0"}
+						<div class="layui-form-item">							
+							<label class="layui-form-label">联系方式</label>
+							<div class="layui-input-inline">
+								<input type="text" name="email" id="email" lay-verify="required" placeholder="请输入联系手机号" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+
+						{/if} 
+						{if condition="($goodinfo.id ==0)"}
+ 						<div class="layui-form-item">							
+							<label class="layui-form-label">请输入QQ</label>
+							<div class="layui-input-inline">
+								<input type="text" name="qq" id="qq" lay-verify="required" placeholder="请输入QQ号" autocomplete="off" class="layui-input">
+							</div>
+						</div>                        
+ 						<div class="layui-form-item">							
+							<label class="layui-form-label">请输入密码</label>
+							<div class="layui-input-inline">
+								<input type="text" name="psw" id="psw"  lay-verify="required" placeholder="请输入QQ号密码" autocomplete="off" class="layui-input">
+							</div>
+						</div> 						
+						{/if}
+						<div class="layui-form-item">
+							<label class="layui-form-label">付款方式</label>
+							<div class="layui-input-inline">
+
+								<select name="type" {$isdaili}>
+									{if condition="$isdaili"}
+										<option value="daili" selected="">余额支付</option>
+										{if condition="($siteinfo.alipay == 1)"}
+										<option value="alipay">支付宝</option>
+										{/if} {if condition="($siteinfo.wxpay == 1)"}
+										<option value="wxpay">微信</option>
+										{/if} {if condition="($siteinfo.qqpay == 1)"}
+										<option value="qqpay">QQ钱包</option>
+										{/if}
+									{else /}
+										{if condition="($siteinfo.alipay == 1)"}
+										<option value="alipay" selected="">支付宝</option>
+										{/if} {if condition="($siteinfo.wxpay == 1)"}
+										<option value="wxpay">微信</option>
+										{/if} {if condition="($siteinfo.qqpay == 1)"}
+										<option value="qqpay">QQ钱包</option>{/if}
+									{/if}
+								</select>
+							</div>
+						</div>
+						<div  
+							{if condition="$goodinfo.id eq 0"}style='display: none;'{/if}  
+						>
+						<p style="float:left"><input type="text" class="trade-input" value="1" id="count" name="count" style="height:27px;margin-right:5px"></p>
+						<p style="line-height:40px;color:#6c6c6c"> 库存:{$kucun}件
+							&nbsp;&nbsp;
+							{$act}
+							&nbsp;&nbsp;
+							{$xiangoumin} 
+							&nbsp;&nbsp;
+							{$xiangou}
+						</p>
+						<input type="hidden" value="{$kucun}" id="kucun" name="kucun">
+						</div>
+						<button type="submit" class="layui-btn layui-btn-normal layui-btn-big" style="float:left;margin-top: 5px;" id="paysubmit">{if condition="$goodinfo.id eq 0"}立即下单{else/}立即购买{/if} </button>
+					</div>
+				</div>
+		</fieldset>
+
+		<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+			<ul class="layui-tab-title">
+				<li class="layui-this">商品描述</li>
+
+			</ul>
+			<div class="layui-tab-content" style="">
+				<div class="layui-tab-item layui-show">{$goodinfo.Introduction}</div>
+
+			</div>
+		</div>
+
+	</form>
+	</div>
+	<script>
+		//注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+		layui.use('element', function() {
+			var element = layui.element;
+
+			//…
+		});
+	</script>
+	<div style="display:none">{$siteinfo.tongji}</div>
+
+	{/block}

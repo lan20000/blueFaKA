@@ -1,0 +1,286 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:66:"C:\phpStudy\PHPTutorial\WWW/APP/adminxyxyxxy\view\index\index.html";i:1563866062;}*/ ?>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title><?php echo $siteinfo['sitename']; ?> - 内部管理系统</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="__STATIC__/dist/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__STATIC__/dist/layuiadmin/style/admin.css" media="all">
+    <!-- __STATIC__/layui/ -->
+    <script src="__STATIC__/layui/layui.js" charset="utf-8"></script>
+</head>
+
+<body class="layui-layout-body">
+
+    <div id="LAY_app">
+        <div class="layui-layout layui-layout-admin">
+            <div class="layui-header">
+                <!-- 头部区域 -->
+                <ul class="layui-nav layui-layout-left">
+                    <li class="layui-nav-item layadmin-flexible" lay-unselect>
+                        <a href="javascript:;" layadmin-event="flexible" title="侧边伸缩">
+                            <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                        <a href="http://www.layui.com/admin/" target="_blank" title="前台">
+                            <i class="layui-icon layui-icon-website"></i>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item" lay-unselect>
+                        <a href="javascript:;" layadmin-event="refresh" title="刷新">
+                            <i class="layui-icon layui-icon-refresh-3"></i>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                        <input type="text" placeholder="搜索..." autocomplete="off" class="layui-input layui-input-search"
+                            layadmin-event="serach" lay-action="template/search.html?keywords=">
+                    </li>
+                </ul>
+                <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
+
+                    <li class="layui-nav-item" lay-unselect>
+                        <a lay-href="app/message/index.html" layadmin-event="message" lay-text="消息中心">
+                            <i class="layui-icon layui-icon-notice"></i>
+
+                            <!-- 如果有新消息，则显示小圆点 -->
+                            <span class="layui-badge-dot"></span>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                        <a href="javascript:;" layadmin-event="theme">
+                            <i class="layui-icon layui-icon-theme"></i>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                        <a href="javascript:;" layadmin-event="note">
+                            <i class="layui-icon layui-icon-note"></i>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                        <a href="javascript:;" layadmin-event="fullscreen">
+                            <i class="layui-icon layui-icon-screen-full"></i>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item" lay-unselect>
+                        <a href="javascript:;">
+                            <cite><?php echo \think\Session::get('username'); ?></cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <!-- <dd><a lay-href="set/user/info.html">基本资料</a></dd>
+              <dd><a lay-href="set/user/password.html">修改密码</a></dd> -->
+                            <hr>
+                            <dd layadmin-event="logout" style="text-align: center;"><a
+                                    href="/adminxyxyxxy/index/loginout.html">退出</a></dd>
+                        </dl>
+                    </li>
+
+                    <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                        <a href="javascript:;" layadmin-event="about"><i
+                                class="layui-icon layui-icon-more-vertical"></i></a>
+                    </li>
+                    <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-unselect>
+                        <a href="javascript:;" layadmin-event="more"><i
+                                class="layui-icon layui-icon-more-vertical"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 侧边菜单 -->
+            <div class="layui-side layui-side-menu">
+                <div class="layui-side-scroll">
+                    <div class="layui-logo" lay-href="home/console.html">
+                        <span><?php echo $siteinfo['sitename']; ?> - 内部管理系统</span>
+                    </div>
+
+                    <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu"
+                        lay-filter="layadmin-system-side-menu">
+                        <li data-name="get" class="layui-nav-item layui-this">
+                            <a href="javascript:;" lay-href="/adminxyxyxxy/index/welcome" lay-tips="数据统计"
+                                lay-direction="2">
+                                <i class="layui-icon layui-icon-chart"></i>
+                                <cite>数据中心</cite>
+                            </a>
+                        </li>
+                        <li data-name="get" class="layui-nav-item">
+                            <a href="javascript:;" lay-href="/adminxyxyxxy/index/order" lay-tips="订单记录"
+                                lay-direction="2">
+                                <i class="layui-icon layui-icon-senior"></i>
+                                <cite>订单记录</cite>
+                            </a>
+                        </li>
+                        <li data-name="component" class="layui-nav-item">
+                            <a href="javascript:;" lay-tips="组件" lay-direction="2">
+                                <i class="layui-icon layui-icon-component"></i>
+                                <cite>商品管理</cite>
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dl>
+                                    <dd data-name="thead">
+                                        <a lay-href="/adminxyxyxxy/index/category" lay-text="">分类列表</a>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd data-name="thead">
+                                        <a lay-href="/adminxyxyxxy/index/addcat.html" lay-text="">添加分类</a>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd data-name="thead">
+                                        <a lay-href="/adminxyxyxxy/index/goods.html" lay-text="">商品列表</a>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd data-name="thead">
+                                        <a lay-href="/adminxyxyxxy/index/addgood.html" lay-text="">添加商品</a>
+                                    </dd>
+                                </dl>
+
+                            </dl>
+                        </li>
+                        <li data-name="component" class="layui-nav-item">
+                            <a href="javascript:;" lay-tips="组件" lay-direction="2">
+                                <i class="layui-icon layui-icon-table"></i>
+                                <cite>卡密管理</cite>
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dl>
+                                    <dd data-name="thead">
+                                        <a lay-href="/adminxyxyxxy/index/kami.html" lay-text="">卡密列表</a>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd data-name="thead">
+                                        <a lay-href="/adminxyxyxxy/index/addkami.html" lay-text="">卡密添加</a>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd data-name="thead">
+                                        <a lay-href="/adminxyxyxxy/index/clear.html" lay-text="">卡密操作</a>
+                                    </dd>
+                                </dl>
+                            </dl>
+                        </li>
+                        <li data-name="component" class="layui-nav-item">
+                            <a href="javascript:;" lay-tips="组件" lay-direction="2">
+                                <i class="layui-icon layui-icon-user"></i>
+                                <cite>会员管理</cite>
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dl>
+                                    <dd data-name="thead">
+                                        <a lay-href="/adminxyxyxxy/index/daili.html" lay-text="">会员列表</a>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd data-name="thead">
+                                        <a lay-href="/adminxyxyxxy/index/adddaili.html" lay-text="">添加会员</a>
+                                    </dd>
+                                </dl>
+
+                            </dl>
+                        </li>
+                        <li data-name="component" class="layui-nav-item">
+                            <a href="javascript:;" lay-tips="组件" lay-direction="2">
+                                <i class="layui-icon layui-icon-user"></i>
+                                <cite>会员系统</cite>
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dl>
+                                    <dd data-name="thead">
+                                        <a lay-href="/adminxyxyxxy/index/mboptions.html" lay-text="">会员后台配置</a>
+                                    </dd>
+                                </dl>
+                            </dl>
+                        </li>
+                        <li data-name="component" class="layui-nav-item">
+                            <a href="javascript:;" lay-tips="组件" lay-direction="2">
+                                <i class="layui-icon layui-icon-console"></i>
+                                <cite>网站管理</cite>
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dl>
+                                    <dd data-name="thead">
+                                        <a lay-href="/adminxyxyxxy/index/option.html" lay-text="">常用设置</a>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd data-name="thead">
+                                        <a lay-href="/adminxyxyxxy/index/apipay.html" lay-text="">支付接口</a>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd data-name="thead">
+                                        <a lay-href="/adminxyxyxxy/index/links.html" lay-text="">友情链接</a>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd data-name="thead">
+                                        <a lay-href="/adminxyxyxxy/index/password.html" lay-text="">个人信息</a>
+                                    </dd>
+                                </dl>
+
+                                <dl>
+                                    <dd data-name="thead">
+                                        <a lay-href="/adminxyxyxxy/index/ms.html" lay-text="">菜单页面</a>
+                                    </dd>
+                                </dl>
+                            </dl>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 页面标签 -->
+            <div class="layadmin-pagetabs" id="LAY_app_tabs">
+                <div class="layui-icon layadmin-tabs-control layui-icon-prev" layadmin-event="leftPage"></div>
+                <div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div>
+                <div class="layui-icon layadmin-tabs-control layui-icon-down">
+                    <ul class="layui-nav layadmin-tabs-select" lay-filter="layadmin-pagetabs-nav">
+                        <li class="layui-nav-item" lay-unselect>
+                            <a href="javascript:;"></a>
+                            <dl class="layui-nav-child layui-anim-fadein">
+                                <dd layadmin-event="closeThisTabs"><a href="javascript:;">关闭当前标签页</a></dd>
+                                <dd layadmin-event="closeOtherTabs"><a href="javascript:;">关闭其它标签页</a></dd>
+                                <dd layadmin-event="closeAllTabs"><a href="javascript:;">关闭全部标签页</a></dd>
+                            </dl>
+                        </li>
+                    </ul>
+                </div>
+                <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
+                    <ul class="layui-tab-title" id="LAY_app_tabsheader">
+                        <li lay-id="home/console.html" lay-attr="home/console.html" class="layui-this"><i
+                                class="layui-icon layui-icon-home"></i></li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <!-- 主体内容 -->
+            <div class="layui-body" id="LAY_app_body">
+                <div class="layadmin-tabsbody-item layui-show">
+                    <iframe src="/adminxyxyxxy/index/welcome" frameborder="0" class="layadmin-iframe"
+                        style="background-color: #fff;"></iframe>
+                </div>
+            </div>
+
+            <!-- 辅助元素，一般用于移动设备下遮罩 -->
+            <div class="layadmin-body-shade" layadmin-event="shade"></div>
+        </div>
+    </div>
+
+    <script>
+        layui.config({
+            base: window.location.protocol + "//" + window.location.host + '/public/static/dist/layuiadmin/' //静态资源所在路径
+        }).extend({
+            index: 'lib/index' //主入口模块
+        }).use('index');
+    </script>
+</body>
+
+</html>

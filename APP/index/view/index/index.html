@@ -1,0 +1,110 @@
+{extend name="base" /}
+{block name="content"}
+
+       <div class="gonggao">     
+       {$siteinfo.gonggao}
+       </div>
+        <div style="background-color: #fff;">
+            <h2 style="padding: 28px 0px 0px 12px;">宝贝筛选</h2>
+            <ul class="goods_screen">
+                <li class="goods_screen_this" onclick="goodsScreen(0,this)">
+                    全部
+                </li>
+                {if condition="$siteinfo.indexmode eq '1'"}
+                    {foreach $res2 as  $key =>$cat}
+                    <li data-type="{$key}" onclick="goodsScreen({$key}+1,this,{$cat.id})">
+                        {$cat.name}
+                    </li>
+                    {/foreach}
+                {/if}
+            </ul>
+        </div>
+       <div class="goods">   
+                           {if condition="$siteinfo.indexmode eq '1'"}
+                                <table class="layui-table">
+                                  <thead>
+                                    <tr >
+                                      <th><font color="#5FB878">商品标题</font></th>
+                                      <th><font color="#5FB878">价格</font></th>
+                                      <th><font color="#5FB878">库存</font></th>
+                                      <th style="text-align:center"><font color="#5FB878">操作</font></th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                         {foreach $res2 as $key =>$cat}
+                                             <tr>
+                                               <td colspan="4" style="background-color:#5FB878;color:#fff;text-align:center">{$cat.name}</td>
+                                             </tr>
+                                            {foreach $res as $good}
+                                                {if condition="$good.abridge eq $cat.abridge"}
+                                                <tr  class="subclass{$key}">
+                                                  <td><font color="black">{$good.name}</font></td>
+                                                  <td>{$good.price}元</td>
+                                                  <td>{$good.kucun}</td>
+                                                  <td style="text-align:center">
+                                                    <a href="/trade/{$good.id}.html" class="layui-btn layui-btn-normal layui-btn-danger">购买
+                                                        <i class="layui-icon">&#xe654;</i>  </a>
+                                                  </td>
+                                                </tr>
+                                                {/if}
+                                            {/foreach}
+                                         {/foreach}
+                                  </tbody>
+                                </table>
+                                {else /}
+                                <div class="layui-row layui-col-space10">
+                                  {foreach $res2 as $cat}
+                                  <div class="layui-col-xs6 layui-col-md3">
+                                    <div class="index-good">
+                                      <a href="/item/{$cat.abridge}.html">
+                                        <div class="index-goodimg">
+                                          <img src="{$cat.image}" alt="" height="100%" width="100%">
+                                        </div>
+                                        <hr>
+                                        <div class="index-goodname">{$cat.name}</div>
+                                      </a>
+                                    </div>
+                                  </div>
+                                  {/foreach}
+                                </div>
+                                
+                          {/if}
+                                
+      </div>
+
+        <hr>
+        <div style="text-align:center;color:#808080;">Copyright © {$siteinfo.sitename} All Rights Reserved</div>
+        <div style="text-align:center">{$siteinfo.tongji}</div>
+     <script>
+         function goodsScreen(val,_this){
+             for (let i=0;i<_this.parentNode.children.length;i++){
+                 if (val==i){
+                     _this.parentNode.children[i].className = 'goods_screen_this';
+                 }else{
+                     _this.parentNode.children[i].className = '';
+                 }
+             }
+         }
+        layui.use('carousel', function(){
+          var carousel = layui.carousel;
+          //建造实例
+          carousel.render({
+            elem: '#test10'
+            ,width: '100%' //设置容器宽度
+            ,arrow: 'always' //始终显示箭头
+            //,anim: 'updown' //切换动画方式
+          });
+        });
+        layui.use('carousel', function(){
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+          elem: '#test1'
+          ,width: '100%' //设置容器宽度
+          ,arrow: 'always' //始终显示箭头
+          //,anim: 'updown' //切换动画方式
+        });
+      });
+</script>
+        </script>
+{/block}

@@ -1,0 +1,77 @@
+{extend name="index" /}
+{block name="body"}
+<form action="" method="post"  class="layui-form">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+      <legend>选择支付接口</legend>
+    </fieldset>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">支付接口</label>
+    <div class="layui-input-block">
+      
+      <input type="radio" name="paytype" value="1" title="码支付" {if condition="($res.paytype == 1)"}checked=""{/if}> 
+      <input type="radio" name="paytype" value="3" title="优云宝" {if condition="($res.paytype == 3)"}checked=""{/if}> 
+      <input type="radio" name="paytype" value="2" title="支付宝即时到账" {if condition="($res.paytype == 2)"}checked=""{/if}>
+      <input type="radio" name="paytype" value="0" title="面对面支付" {if condition="($res.paytype == 0)"}checked=""{/if}>
+    </div>
+  </div>
+<div >
+	  <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+    <legend>优云宝配置</legend>
+  </fieldset>
+<div class="layui-form-item">
+    <label class="layui-form-label">APP ID</label>
+    <div class="layui-input-inline">
+      <input type="text" name="partner" value="{$res.partner}" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+      <label class="layui-form-label">APP KEY</label>
+      <div class="layui-input-inline">
+        <input type="text" name="key" value="{$res.key}" class="layui-input">
+      </div>
+    </div>
+
+</div>
+    
+    
+  <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+    <legend>码支付配置</legend>
+  </fieldset>
+  <div class="layui-form-item">
+    <label class="layui-form-label">商户ID</label>
+    <div class="layui-input-inline">
+      <input type="text'" name="mzfid" value="{$res.mzfid}" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">token</label>
+    <div class="layui-input-inline">
+      <input type="text'" name="mzftoken" value="{$res.mzftoken}" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">通信密匙</label>
+    <div class="layui-input-inline">
+      <input type="text" name="mzfkey" value="{$res.mzfkey}" class="layui-input">
+    </div>
+
+  </div>
+  
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+      </div>
+    </div>    
+</form>
+  <script>
+        layui.use('element', function(){
+                var element = layui.element;
+                
+                //一些事件监听
+                element.on('tab(demo)', function(data){
+                  console.log(data);
+                });
+              });
+        </script>
+{/block}
